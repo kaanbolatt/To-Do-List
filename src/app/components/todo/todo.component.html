@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5 mx-auto">
+      <h3 class="bg-primary text-white p-3">To-Do List</h3>
+      <div class="input-group mb-3">
+        <input #txtItem type="text" class="form-control" (keyup.enter)="addItem(txtItem.value); txtItem.value">
+        <button class="btn btn-outline-primary" (click)="addItem(txtItem.value)">Add</button>
+      </div>
+      <div class="form-check mb-3">
+        <input type="checkbox" [(ngModel)]="displayAll" class="form-check-input" name="" id="displayAll">
+        <label for="displayAll" class="form-check-label">Show All</label>
+      </div>
+      <div class="my-2" *ngIf="displayCount() > 0">
+        {{displayCount()}} task completed
+      </div>
+      <div class="alert alert-warning" *ngIf="getItems().length === 0 else itemsTable">No element in the list.</div>
+      <ng-template #itemsTable>
+        <table *ngIf="getItems().length > 0" class="table table-bordered">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Description</th>
+              <th>Action</th>
+              <th>Status</th>
+              <th>Edit</th>
+              <th>Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of getItems(); let i = index;">
+              <td>{{i+1}}</td>
+              <td>{{item.description}}</td>
+              <td>{{item.action}}</td>
+              <td><select [(ngModel)]="item.action" name="Status" id="Status">
+                  <option value="Todo">Todo</option>
+                  <option value="Continues">Continues</option>
+                  <option value="Finished">Finished</option>
+                </select>
+              </td>
+              <td><button type="button" class="btn_transparent" (click)="onEdit(i)"><i class='fas fa-edit' style="color:red"></i></button></td>
+              <td><button type="button" class="btn_transparent" (click)="onDelete(i)"><i class='fas fa-trash' style="color:red"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+    </div>
+  </div>
+</div>
