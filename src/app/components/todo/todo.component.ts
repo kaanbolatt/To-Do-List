@@ -13,13 +13,12 @@ export class TodoComponent {
     //? this.model.items = this.getItemsFromLS(); // LOCALE STORAGE'DE TUTMAK İÇİN VAR
    }
 
-
-
   model = new Model();
   displayAll:boolean = false;
   itemStatus:boolean;
 
   addItem(value:any){
+    //! Buraya da CRUD işlemleri ile ADD bağlanması gerekiyor. direkt olarak veri tabanına işleyecek hale getirilmeli.
     if(value!=""){
       let data = {description: value, action: "Todo"};
       this.model.items.push(data)
